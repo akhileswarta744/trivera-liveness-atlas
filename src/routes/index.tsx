@@ -88,7 +88,7 @@ function Dashboard() {
   const changePreview = (p: PreviewState) => {
     setPreview(p);
     logActivity(
-      p === "none" ? "Preview set to Awaiting API" : `Preview state: ${p}`,
+      p === "none" ? "Preview set to Awaiting" : `Preview state: ${p}`,
       "Illustrative demo state, not a biometric result.",
     );
   };

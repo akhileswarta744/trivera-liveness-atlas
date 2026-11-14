@@ -56,18 +56,31 @@ export function FilterBar({
         Dashboard filters
       </h2>
       <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
-        <div className="flex min-w-0 flex-col gap-4 md:flex-row md:flex-wrap md:items-end">
+        <div className="flex min-w-0 flex-col gap-4 md:flex-row md:flex-wrap md:items-start md:gap-6">
           <div className="flex min-w-0 flex-col gap-1.5">
-            <span id="date-filter-label" className="eyebrow">
-              Date range
-            </span>
+            <div className="flex items-center justify-between gap-3">
+              <span id="date-filter-label" className="eyebrow">
+                Date range
+              </span>
+              <Button
+                variant="link"
+                size="sm"
+                className="h-auto px-0 text-xs"
+                aria-label="Clear date range"
+                disabled={date.preset === "any"}
+                onClick={() => onChange(clearDateFilter(filters))}
+              >
+                <X aria-hidden />
+                Clear
+              </Button>
+            </div>
             <div className="flex items-center gap-1">
               <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
                     aria-labelledby="date-filter-label date-filter-value"
-                    className="h-10 min-w-0 flex-1 justify-between gap-3 sm:w-60 sm:flex-none"
+                    className="h-10 w-full min-w-0 justify-between gap-3 md:w-60"
                   >
                     <span className="flex min-w-0 items-center gap-2">
                       <CalendarDays aria-hidden className="text-primary" />
@@ -125,25 +138,27 @@ export function FilterBar({
                   </div>
                 </PopoverContent>
               </Popover>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="size-10 shrink-0"
-                aria-label="Clear date range"
-                title="Clear date range"
-                disabled={date.preset === "any"}
-                onClick={() => onChange(clearDateFilter(filters))}
-              >
-                <X aria-hidden />
-              </Button>
             </div>
           </div>
 
           <div className="flex min-w-0 flex-col gap-1.5">
-            <span id="status-filter-label" className="eyebrow">
-              Capability status
-            </span>
-            <div className="flex flex-wrap items-center gap-1">
+            <div className="flex items-center justify-between gap-3">
+              <span id="status-filter-label" className="eyebrow">
+                Capability status
+              </span>
+              <Button
+                variant="link"
+                size="sm"
+                className="h-auto px-0 text-xs"
+                aria-label="Clear status filter"
+                disabled={statuses.length === 0}
+                onClick={() => onChange(clearStatusFilter(filters))}
+              >
+                <X aria-hidden />
+                Clear
+              </Button>
+            </div>
+            <div>
               <ToggleGroup
                 type="multiple"
                 variant="outline"
@@ -170,17 +185,6 @@ export function FilterBar({
                   );
                 })}
               </ToggleGroup>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="size-10 shrink-0"
-                aria-label="Clear status filter"
-                title="Clear status filter"
-                disabled={statuses.length === 0}
-                onClick={() => onChange(clearStatusFilter(filters))}
-              >
-                <X aria-hidden />
-              </Button>
             </div>
           </div>
         </div>

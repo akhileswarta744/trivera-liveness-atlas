@@ -28,20 +28,20 @@ export function SummaryCard({
         className,
       )}
     >
-      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
-        <div className="flex min-w-0 items-center gap-2">
-          <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-accent text-accent-foreground">
-            <Icon aria-hidden className="size-4" />
-          </span>
-          <p className="truncate text-sm font-medium text-muted-foreground">{label}</p>
-        </div>
-        {badge}
+      <div className="flex min-w-0 items-center gap-2">
+        <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-accent text-accent-foreground">
+          <Icon aria-hidden className="size-4" />
+        </span>
+        <p className="min-w-0 text-sm font-medium text-muted-foreground">{label}</p>
       </div>
       <p className="font-display text-3xl font-semibold tracking-tight text-foreground">
         {value}
         {unit && <span className="ml-1 text-base font-medium text-muted-foreground">{unit}</span>}
       </p>
-      <p className="text-xs text-muted-foreground">{hint}</p>
+      <div className="mt-auto flex flex-col items-start gap-2">
+        {badge}
+        <p className="text-xs text-muted-foreground">{hint}</p>
+      </div>
     </div>
   );
 }

@@ -21,7 +21,7 @@ const VERDICT_STYLE: Record<Verdict, { box: string; text: string; icon: typeof S
 };
 
 const OPTIONS: { value: PreviewState; label: string }[] = [
-  { value: "none", label: "Awaiting API" },
+  { value: "none", label: "Awaiting" },
   ...VERDICTS.map((v) => ({ value: v as PreviewState, label: v })),
 ];
 
@@ -64,7 +64,7 @@ export function DecisionResult({
                 key={o.value}
                 htmlFor={id}
                 className={cn(
-                  "cursor-pointer rounded-lg px-2 py-2 text-center text-sm font-medium text-muted-foreground transition-colors",
+                  "cursor-pointer rounded-lg px-2 py-2 text-center whitespace-nowrap text-sm font-medium text-muted-foreground transition-colors",
                   "has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-1 has-[:focus-visible]:outline-ring",
                   checked && "bg-card text-foreground shadow-panel",
                 )}

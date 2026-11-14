@@ -45,7 +45,9 @@ export function FilterBar({
   const [open, setOpen] = useState(false);
   const { date, statuses } = filters;
   const selectedRange: DateRange | undefined =
-    date.preset === "custom" && date.from ? { from: date.from, to: date.to } : undefined;
+    date.preset === "custom" && date.from
+      ? { from: date.from, ...(date.to ? { to: date.to } : {}) }
+      : undefined;
   const statusValue = statuses.length === 0 ? [ALL] : statuses;
 
   return (
@@ -102,7 +104,7 @@ export function FilterBar({
                     <Calendar
                       mode="range"
                       selected={selectedRange}
-                      defaultMonth={selectedRange?.from}
+                      {...(selectedRange?.from ? { defaultMonth: selectedRange.from } : {})}
                       disabled={{ after: new Date() }}
                       onSelect={(range) => {
                         if (!range?.from) {
@@ -111,7 +113,11 @@ export function FilterBar({
                         }
                         onChange({
                           ...filters,
-                          date: { preset: "custom", from: range.from, to: range.to },
+                          date: {
+                            preset: "custom",
+                            from: range.from,
+                            ...(range.to ? { to: range.to } : {}),
+                          },
                         });
                       }}
                       className="pointer-events-auto p-3"

@@ -21,7 +21,7 @@ export function normalizeApiBase(input: string): ApiBaseResult {
   return { ok: true, value: url.toString().replace(/\/+$/, "") };
 }
 
-const ENV_DEFAULT = ((import.meta.env.VITE_TRIVERA_API_BASE as string | undefined) ?? "").trim();
+const ENV_DEFAULT = ((import.meta.env["VITE_TRIVERA_API_BASE"] as string | undefined) ?? "").trim();
 
 export type ApiBaseSource = "saved" | "env" | "none";
 

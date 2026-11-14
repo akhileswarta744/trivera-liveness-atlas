@@ -61,7 +61,7 @@ export function DecisionHistory({ dateFilter }: { dateFilter: DateRangeFilter })
               <History aria-hidden className="size-8 text-muted-foreground" strokeWidth={1.5} />
               <p className="font-medium text-foreground">No decisions</p>
               <p className="max-w-sm text-sm text-muted-foreground">{m.empty}</p>
-              {dateFilter.preset !== "all" && (
+              {dateFilter.preset !== "any" && (
                 <p className="text-xs text-muted-foreground">
                   Showing: {describeDateFilter(dateFilter)}
                 </p>

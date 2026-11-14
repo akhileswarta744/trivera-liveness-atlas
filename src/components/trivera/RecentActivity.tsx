@@ -37,7 +37,7 @@ export function RecentActivity({ dateFilter }: { dateFilter: DateRangeFilter }) 
         ) : undefined
       }
     >
-      {dateFilter.preset !== "all" && (
+      {dateFilter.preset !== "any" && (
         <p className="mb-3 text-xs text-muted-foreground">
           {describeDateFilter(dateFilter)} · undated placeholders always show
           {hiddenCount > 0 ? ` · ${hiddenCount} hidden by filter` : ""}

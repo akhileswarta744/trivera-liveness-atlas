@@ -1,6 +1,6 @@
 import type { ImplementationStatus } from "./trivera-data";
 
-export type DatePreset = "all" | "today" | "7d" | "30d" | "custom";
+export type DatePreset = "any" | "today" | "7d" | "30d" | "custom";
 
 export interface DateRangeFilter {
   preset: DatePreset;
@@ -9,7 +9,7 @@ export interface DateRangeFilter {
 }
 
 export const DATE_PRESET_LABEL: Record<Exclude<DatePreset, "custom">, string> = {
-  all: "All time",
+  any: "Any time",
   today: "Today",
   "7d": "Last 7 days",
   "30d": "Last 30 days",
@@ -33,7 +33,7 @@ export function resolveDateRange(
   now: Date = new Date(),
 ): { start: Date; end: Date } | null {
   switch (filter.preset) {
-    case "all":
+    case "any":
       return null;
     case "today":
       return { start: startOfDay(now), end: endOfDay(now) };
@@ -62,4 +62,35 @@ export function isWithinDateRange(at: number, filter: DateRangeFilter, now: Date
 
 export function matchesStatusFilter(status: ImplementationStatus, selected: ImplementationStatus[]) {
   return selected.length === 0 || selected.includes(status);
+}
+
+export const ALL_STATUSES_LABEL = "All statuses";
+
+export interface DashboardFilters {
+  date: DateRangeFilter;
+  /** Empty means "All statuses". */
+  statuses: ImplementationStatus[];
+}
+
+/** Initial state and what Reset restores: Last 7 days + All statuses. */
+export function defaultFilters(): DashboardFilters {
+  return { date: { preset: "7d" }, statuses: [] };
+}
+
+/** Clearing the date range selects "Any time" and leaves statuses untouched. */
+export function clearDateFilter(filters: DashboardFilters): DashboardFilters {
+  return { ...filters, date: { preset: "any" } };
+}
+
+/** Clearing statuses selects "All statuses" and leaves the date range untouched. */
+export function clearStatusFilter(filters: DashboardFilters): DashboardFilters {
+  return { ...filters, statuses: [] };
+}
+
+export function resetFilters(): DashboardFilters {
+  return defaultFilters();
+}
+
+export function isDefaultFilters(filters: DashboardFilters): boolean {
+  return filters.date.preset === "7d" && filters.statuses.length === 0;
 }

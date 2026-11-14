@@ -75,6 +75,7 @@ function ScenarioCard({
         checked={selected}
         onChange={() => onSelect(scenario.id)}
         className="sr-only"
+        aria-labelledby={`${inputId}-title`}
         aria-describedby={`${inputId}-desc`}
       />
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-2">
@@ -88,7 +89,9 @@ function ScenarioCard({
           >
             <Icon aria-hidden className="size-4.5" />
           </span>
-          <span className="min-w-0 font-semibold text-foreground">{scenario.label}</span>
+          <span id={`${inputId}-title`} className="min-w-0 font-semibold text-foreground">
+            {scenario.label}
+          </span>
         </div>
         <span
           aria-hidden

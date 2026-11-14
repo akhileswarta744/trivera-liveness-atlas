@@ -8,5 +8,5 @@
 - [x] Filter rules: separate clears (date → "Any time", status → "All statuses"), Reset → "Last 7 days" + "All statuses"
 - [x] Setup page: configurable API base + run/wiring notes
 - [x] Tests for honesty rules (statuses, API base validation)
-- [ ] README run instructions + status summary
-- [ ] Screenshot check at phone / tablet / desktop sizes
+- [x] README run instructions + status summary
+- [x] Screenshot check at phone / tablet / desktop sizes

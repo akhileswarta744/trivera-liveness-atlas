@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Known capability state (scenarios, checklist statuses, limitations) lives in `src/lib/trivera-data.ts`; change a status only when the capability really ships — the UI must never present simulated data as real.
+- No API calls until `docs/API.md` exists; read the base address only through `useApiBase()` so wiring has one entry point.
+- Dashboard filter state uses the pure helpers in `src/lib/filters.ts` (covered by `src/test/filters.test.ts`) so clear/reset rules stay testable.

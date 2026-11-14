@@ -1,29 +1,38 @@
-# Welcome to your Lovable project
+# Trivera — face liveness & authentication prototype (frontend shell)
 
-This project was built with [Lovable](https://lovable.dev).
+Frontend shell for the HID Hackathon liveness challenge. The M0 backend evaluates synthetic
+evidence summaries only; this shell makes **no API calls** and shows no real detection results.
 
-## Build with Lovable
-
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Run locally
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+bun install        # or: npm install
+bun run dev        # or: npm run dev
+bun run test       # unit tests for filter rules and status labels
 ```
 
-## Built with
+Optional default API address (can also be set on the Setup page, saved per browser):
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+```sh
+# .env
+VITE_TRIVERA_API_BASE=http://localhost:8000
+```
+
+## Wiring the API (pending)
+
+Exact routes and schemas are intentionally not guessed. Once the backend and `docs/API.md`
+exist, wire: service health + calibrations (System status), scenario list/run (Scenarios),
+verdict + reasons + gates + policy version + metadata (Decision result), records by mode
+(History), and a capture contract (Authentication demo). Static project state lives in
+`src/lib/trivera-data.ts`; the API base is read via `useApiBase()` in `src/lib/api-config.ts`.
+
+## Challenge status
+
+| Feature | Status |
+| --- | --- |
+| Dashboard shell, scenario selection, filters | Implemented |
+| Printed photo / screen / replay / mask | Simulated |
+| ALLOW / VERIFY / DENY decision, fallback handling | Simulated (illustrative) |
+| API integration, live camera capture | Pending |
+| Liveness (PAD), face recognition, depth analysis | Pending |
+| Decision under 2 s, accuracy | Unmeasured |
